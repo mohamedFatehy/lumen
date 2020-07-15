@@ -11,9 +11,17 @@
 |
 */
 
+use App\Events\ExampleEvent;
+
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    event(new ExampleEvent('this is message'));
+    return 'Done';
 });
+
+$router->get('/channel', function () use ($router) {
+    return view('welcome');
+});
+
 
 $router->get('categories', 'CategoriesController@index');
 $router->get('categories/{id}', 'CategoriesController@show');
